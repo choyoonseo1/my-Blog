@@ -24,6 +24,7 @@ function App() {
 
   // 좋아요 누른 숫자를 보관할 state
   // setLike는 증감할 때 사용한다.
+  // 값이 번하면 무조건 useState[초기값]
   const [like, setLike] = useState([0, 0, 0]);
 
   // 좋아요 처리 함수
@@ -55,14 +56,20 @@ function App() {
       <button onClick={() => {
         const sortedTitle = [...title].sort()
         setTitle(sortedTitle);
+
       }}>글 정렬 하기</button>
 
       <div className='list'>
-        <h4>{title[0]}<span onClick={() => {
-          const newLikes = [...like]
-          newLikes[0]++
-          setLike(newLikes)
-        }}>👍</span>{like[0]}
+        <h4 onClick={() => {
+          setModal(!modal)
+        }}>{title[0]}
+          <span onClick={() => {
+            const newLikes = [...like]
+            newLikes[0]++
+            setLike(newLikes)
+          }}>👍
+          </span>{like[0]}
+
           {/* 변경 단추 클릭하면 '남자코트추천 -> 여자코트추천' */}
           <button onClick={changeTitle}>변경</button>
         </h4>
